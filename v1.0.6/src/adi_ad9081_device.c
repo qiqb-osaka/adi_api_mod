@@ -171,16 +171,20 @@ int32_t adi_ad9081_device_boot_post_clock(adi_ad9081_device_t *device)
 	/* check core status */
 	err = adi_ad9081_hal_reg_get(device, 0x3742, &core_status); /* @msg2 */
 	AD9081_ERROR_RETURN(err);
-	if (core_status < 0xF0)
+	if (core_status < 0xF0) {
 		AD9081_LOG_ERR(
 			"Boot did not reach spot where it waits for application code");
+        AD9081_ERROR_RETURN(API_CMS_ERROR_INIT_SEQ_FAIL);
+	}
 
 	/* verify clock switch is done */
 	err = adi_ad9081_hal_bf_get(device, 0x3740, 0x0103, &clk_switch_done,
 				    1); /* @msg0 */
 	AD9081_ERROR_RETURN(err);
-	if (clk_switch_done == 0x0)
+	if (clk_switch_done == 0x0) {
 		AD9081_LOG_ERR("Clock switch not done");
+		AD9081_ERROR_RETURN(API_CMS_ERROR_INIT_SEQ_FAIL);
+	}
 
 	/* additional write, AD9081API-680 */
 	err = adi_ad9081_hal_reg_set(device, 0x2112, 0x01);

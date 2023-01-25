@@ -274,11 +274,6 @@ unsigned char AD9082_R(struct udp_env *udp_env_info, unsigned short addr)
     if(val != NULL && strcmp(val, "1") == 0){
         chip = 1;
     }
-    char *target_addr = "10.0.0.3";
-    val = getenv("TARGET_ADDR");
-    if(val != NULL){
-        target_addr = val;
-    }
     int retval = exstickge_ad9082(udp_env_info, chip, addr, 0, EXSTICKGE_READ);
     //retval = exstickge_ad9082(&env, chip, addr, 0, EXSTICKGE_READ);
     //close_socket(&env);
@@ -395,12 +390,6 @@ void AD9082_W(struct udp_env *udp_env_info, unsigned short addr,unsigned char da
     if(val != NULL && strcmp(val, "1") == 0){
         chip = 1;
     }
-    char *target_addr = "10.0.0.3";
-    val = getenv("TARGET_ADDR");
-    if(val != NULL){
-        target_addr = val;
-    }
-    //printf("target addr:%s\n", target_addr);
     int retval = exstickge_ad9082(udp_env_info, chip, addr, data, EXSTICKGE_WRITE);
     //retval = exstickge_ad9082(&env, chip, addr, data, EXSTICKGE_WRITE);
     //usleep(1000);

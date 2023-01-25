@@ -1,5 +1,7 @@
 *~
 hello
+hello_monitor
+hello_readin
 *.o
 gpio
 spi_i2c
@@ -19,3 +21,9 @@ build
 README.pdf
 vivado*.jou
 vivado*.log
+bin/
+pkgsrc/
+dist/
+
+.idea/
+.DS_Store
