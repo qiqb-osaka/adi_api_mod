@@ -1,6 +1,6 @@
 # API to manipulate LSIs in QuBE
 
-## Setup
+## Setup (Conventional)
 
 For example,
 
@@ -12,6 +12,28 @@ For example,
 % pipenv shell
 % pipenv install ${TMPDIR}/python/qubelsi
 ```
+
+## Setup (New)
+qubelsiのwhlパッケージを作成して、仮想環境にインストールする。
+パッケージの作成が一手間かかるが、バイナリやtclファイルもパッケージに含まれるので、実行環境からリポジトリを参照する必要がないのが利点。
+
+ビルド用の仮想環境にて（実行環境がビルド環境を兼ねてもよい）
+```
+% cd ${TMPDIR}
+% git clone git@github.com:qiqb-osaka/adi_api_mod.git
+% cd adi_api_mod/python/qubelsi
+% ./build.sh
+```
+
+実行環境にインストール。
+```
+% cd ${PIPENVDIR}
+% pipenv shell
+% pipenv install ${TMPDIR}/python/qubelsi/dist/qubelsi-1.0-py3-none-any.whl
+```
+
+上記の方法でもできるのだが、どこか自分でビルドしたパッケージをまとめて置く場所をつくり、
+Pipenvファイルから参照するのが一番良い。
 
 ## Example
 

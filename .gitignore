@@ -1,5 +1,7 @@
 *~
 hello
+hello_monitor
+hello_readin
 *.o
 gpio
 spi_i2c
@@ -10,11 +12,26 @@ set_nco
 set_fsc
 get_jesd_status
 set_dac_lane_mapping
+set_jesd_tx_link_conv_sel
 set_xbar
 print_ad9082_info
 .nfs*
 *.egg-info
-build
 README.pdf
 vivado*.jou
 vivado*.log
+webtalk*.jou
+webtalk*.log
+__pycache__/
+
+# directory of generated binaries and packages
+bin/
+dist/
+build/
+python/qubelsi/qubelsi/bin/
+
+# jetbrain's IDEs
+.idea
+
+# metadata file of OSX
+.DS_Store

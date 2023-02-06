@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 BASEDIR=`dirname $0`
 WORKDIR=`pwd`
 
@@ -21,7 +23,7 @@ cd $WORKDIR
 
 pwd
 if [ -n "$BITFILE" ]; then
-  vivado -mode batch -source $BASEDIR/config.tcl
+  vivado -mode batch -source $BASEDIR/utils/config.tcl
 fi
 
 cd $BASEDIR/v1.0.6/src

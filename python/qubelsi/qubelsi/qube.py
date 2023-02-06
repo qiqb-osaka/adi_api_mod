@@ -10,8 +10,8 @@ import qubelsi.gpio
 
 class Qube:
     
-    def __init__(self, addr, path):
-        self.path = path
+    def __init__(self, addr, path=None):
+        self.path = qubelsi.__path__[0]+"/bin" if path is None else path
         self.ad9082 = [qubelsi.ad9082.AD9082(addr, path, i) for i in range(2)]
         self.lmx2594 = [qubelsi.lmx2594.LMX2594(addr, path, i) for i in range(8)]
         self.lmx2594_ad9082 = [qubelsi.lmx2594.LMX2594(addr, path, i+8) for i in range(2)]
