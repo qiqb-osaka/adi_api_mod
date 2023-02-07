@@ -25,9 +25,10 @@ class LMX2594:
         
         if ad9082_mode:
             self.write_value(0x00, 0x6612) # R6 [14]VCO_PHASE_SYNC=0
+            self.write_value(0x00, 0x6610)
         else:
             self.write_value(0x00, 0x2612) # R6 [14]VCO_PHASE_SYNC=0, [9]OUT_MUTE=1
-        self.write_value(0x00, 0x2610)
+            self.write_value(0x00, 0x2610)
         self.read_value(0x00)
         
         self.write_value(0x4E, 0x0001)
