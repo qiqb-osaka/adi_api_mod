@@ -72,8 +72,11 @@ class AD9082:
     def read_value(self, addr):
         return self.handle.read_ad9082(self.chip, addr)
 
-    def do_init(self, message_out=False):
+    def do_init(self, monitor=False, message_out=False):
         self._setenv()
-        ret = subprocess.check_output("{}/v1.0.6/src/hello".format(self.path), encoding='utf-8')
+        if monitor:
+            ret = subprocess.check_output("{}/v1.0.6/src/hello_monitor".format(self.path), encoding='utf-8')
+        else:
+            ret = subprocess.check_output("{}/v1.0.6/src/hello".format(self.path), encoding='utf-8')
         if message_out:
             print(ret)
