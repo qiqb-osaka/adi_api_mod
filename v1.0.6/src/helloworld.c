@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 
 #include "adi_ad9081_config.h"
@@ -8,7 +9,7 @@
 
 #include "util.h"
 
-int main()
+int main(int argc, char *argv[])
 {
 
     int step = 0;
@@ -19,9 +20,19 @@ int main()
     uint64_t dac_clk_hz=    11640000000;
     uint64_t adc_clk_hz=     2910000000*2;
     uint64_t dev_ref_clk_hz=11640000000;
+    uint8_t tx_main_interp = 6;
 
     printf("Hello World \n\r");
 
+    if (argc >= 2) {
+        tx_main_interp = strtoul(argv[1], NULL, 10);
+	if ((tx_main_interp != 6) && (tx_main_interp != 8) && (tx_main_interp != 12)) {
+	    printf("invalid tx_main_interp value (%d) is given\n", tx_main_interp);
+	    return 1;
+	}
+    }
+    printf("tx main interpolation rate = %d\n", tx_main_interp);
+    
     char *target_addr = "10.0.0.3";
     char *val = getenv("TARGET_ADDR");
     if(val != NULL){
@@ -41,9 +52,8 @@ int main()
     printf("0x4=%X\n", reg_data);
 
     /******    DAC-Setup   ********/
-    uint8_t tx_main_interp = 6;
-    uint8_t tx_chan_interp = 4;
     uint8_t tx_dac_chan[] = {0x01, 0x02, 0x1C, 0xE0};
+    uint8_t tx_chan_interp = 24 / tx_main_interp;
 
     if(ad9082_chip() == 1){
         tx_dac_chan[0] = 0x07;

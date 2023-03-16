@@ -21,7 +21,7 @@ class Qube:
         self.bitfile = 'as is'
         self.rf_type = 'as is'
 
-    def do_init(self, rf_type='A', bitfile=None, monitor=False, message_out=False):
+    def do_init(self, rf_type='A', bitfile=None, monitor=False, main_intrp=6, message_out=False):
         
         if not bitfile is None:
             if os.path.exists(bitfile) == False:
@@ -70,7 +70,7 @@ class Qube:
         if message_out:
             print("init AD9082")
         for c in self.ad9082:
-            c.do_init(monitor=monitor, message_out=message_out)
+            c.do_init(monitor=monitor, main_intrp=main_intrp, message_out=message_out)
 
         if message_out:
             print("QuBE Type={0}, BITFILE={1}".format(self.rf_type, self.bitfile))
